@@ -130,20 +130,23 @@ def run_cmake():
             mingw_bin_dir = folder
         if folder.endswith("5.5\mingw492_32\\bin"):
             qt_dll_dir = folder
-    print("Running cmake -G \"MinGW MakeFiles\" -DWITH_TESTS=true -DCMAKE_PREFIX_PATH=\"%s\" %s"
-          % (lib_cmake_dir, pa_cmake_dir))
-    os.environ["PATH"] = "C:\Program Files (x86)\CMake\\bin" + os.pathsep + mingw_bin_dir
-    print(os.environ["PATH"])
-    subprocess.call(["cmake",
-                     "-G",
-                     "MinGW Makefiles",
-                     "-DWITH_TESTS=true",
-                     "-DCMAKE_PREFIX_PATH=" + lib_cmake_dir + " ",
-                     pa_cmake_dir])
-    subprocess.call(["mingw32-make"], shell=True)
-    for dep in ["Qt5Core.dll", "Qt5Widgets.dll", "Qt5Core.dll", "Qt5Gui.dll", "Qt5Sql.dll", "libstdc++-6.dll", "libwinpthread-1.dll", "libgcc_s_dw2-1.dll"]:
-        print("Copying %s here" % os.path.join(qt_dll_dir + "\\" + dep))
-        shutil.copy(os.path.join(qt_dll_dir + "\\" + dep), ".")
+
+    if lib_cmake_dir == "" or mingw_bin_dir == "" or qt_dll_dir == "":
+        print("Qt installation is broken, try re-installing.")
+    else:
+        print("Running cmake -G \"MinGW MakeFiles\" -DWITH_TESTS=true -DCMAKE_PREFIX_PATH=\"%s\" %s"
+              % (lib_cmake_dir, pa_cmake_dir))
+        os.environ["PATH"] = "C:\Program Files (x86)\CMake\\bin" + os.pathsep + mingw_bin_dir
+        print(os.environ["PATH"])
+        subprocess.call(["cmake",
+                         "-G",
+                         "MinGW Makefiles",
+                         "-DCMAKE_PREFIX_PATH=" + lib_cmake_dir + " ",
+                         pa_cmake_dir])
+        subprocess.call(["mingw32-make"], shell=True)
+        for dep in ["Qt5Core.dll", "Qt5Widgets.dll", "Qt5Core.dll", "Qt5Gui.dll", "Qt5Sql.dll", "libstdc++-6.dll", "libwinpthread-1.dll", "libgcc_s_dw2-1.dll"]:
+            print("Copying %s here" % os.path.join(qt_dll_dir + "\\" + dep))
+            shutil.copy(os.path.join(qt_dll_dir + "\\" + dep), ".")
 
 
 if __name__ == "__main__":
