@@ -144,7 +144,7 @@ def run_cmake():
                          "-DCMAKE_PREFIX_PATH=" + lib_cmake_dir + " ",
                          pa_cmake_dir])
         subprocess.call(["mingw32-make"], shell=True)
-        for dep in ["Qt5Core.dll", "Qt5Widgets.dll", "Qt5Core.dll", "Qt5Gui.dll", "Qt5Sql.dll", "libstdc++-6.dll", "libwinpthread-1.dll", "libgcc_s_dw2-1.dll"]:
+        for dep in ["Qt5Core.dll", "Qt5Widgets.dll", "Qt5Core.dll", "Qt5Gui.dll", "Qt5Sql.dll", "Qt5Network" , "libstdc++-6.dll", "libwinpthread-1.dll", "libgcc_s_dw2-1.dll"]:
             print("Copying %s here" % os.path.join(qt_dll_dir + "\\" + dep))
             shutil.copy(os.path.join(qt_dll_dir + "\\" + dep), ".")
 
