@@ -5,7 +5,6 @@ import tempfile
 import tarfile
 import zipfile
 import subprocess
-import winreg
 import shutil
 from clint.textui import progress
 
@@ -186,10 +185,5 @@ def clone_repo():
     return os.path.join(clone_dir, "Client-dev")
 
 if __name__ == "__main__":
-    try:
-        with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\Wow6432Node\Kitware\CMake 3.2.3") as key:
-            paths["CMake"] = winreg.EnumValue(key, 0)[1]
-    except FileNotFoundError:
-        pass
     check_paths()
     run_cmake()
