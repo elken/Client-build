@@ -1,6 +1,6 @@
 # Client-build
 
-Quick & easy script to bootstrap a [Project Ascension]() installation.
+Quick & easy script to bootstrap a [Project Ascension](https://github.com/Proj-Ascension/Client) installation.
 
 You can either run this script yourself, or you can download and run a pre-compiled dependency-free executable [here](https://github.com/elken/Client-build/releases/tag/v1.0).
 
